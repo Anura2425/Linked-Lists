@@ -63,3 +63,4 @@ int LinkedList::size(){
 	}
 	return count;
 }
+//hi
