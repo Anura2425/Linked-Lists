@@ -4,10 +4,10 @@
 class Node {
 	public:
 		int key;
-		int value;
+		double value;
 		Node* next;
 		~Node();
-		Node(int val);
+		Node(double val);
 };
 
 class LinkedList {
@@ -18,8 +18,8 @@ class LinkedList {
 		LinkedList();
 		~LinkedList();
 		Node* get_head();
-		bool push_back(int val);
-		bool push_front(int val);
+		bool push_back(double val);
+		bool push_front(double val);
 		bool is_empty();
 		int size();
 };

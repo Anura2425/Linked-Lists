@@ -1,7 +1,7 @@
 #include "linked_list.hpp"
 #include <iostream>
 
-Node::Node(int val = 0) {
+Node::Node(double val = 0) {
 	value = val;
 	next = nullptr;
 }
@@ -28,7 +28,7 @@ LinkedList::~LinkedList() {
 	}
 }
 
-bool LinkedList::push_back(int val) {
+bool LinkedList::push_back(double val) {
 	if (head == nullptr){
 		head = new Node(val);
 	}
@@ -40,7 +40,7 @@ bool LinkedList::push_back(int val) {
 	return true;
 }
 
-bool LinkedList::push_front(int val) {
+bool LinkedList::push_front(double val) {
 	if (head == nullptr){  
 		head = new Node(val);
 	} else {
