@@ -1,16 +1,19 @@
 #include "linked_list.hpp"
 #include <iostream>
+#include <cassert>
 
 bool test_push_back();
 bool test_push_front();
 bool test_is_empty();
 bool test_size();
+bool test_at();
 
 int main() {
 	std::cout << "Test Push Back: " << (test_push_back() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Push Front: " << (test_push_front() ? "Passed" : "Failed") << std::endl;	
 	std::cout << "Test Is Empty: " << (test_is_empty() ? "Passed" : "Failed" ) << std::endl;
 	std::cout << "Test Size: " << (test_size() ? "Passed" : "Failed") << std::endl; 
+	std::cout << "Test At: " << (test_at() ? "Passed" : "Failed") << std::endl;
 }
 
 bool test_size(){
@@ -81,3 +84,26 @@ bool test_push_back() {
 	//clean up
 	return av1 && av2 && av3;
 }	
+
+bool test_at(){
+	// set up
+	LinkedList l;
+	bool rv1 = l.push_back(10); // index 0
+	bool rv2 = l.push_back(20); // index 1
+	bool rv3 = l.push_back(30); // index 2
+
+	//execution
+	Node* at1 = l.at(0);
+	Node* at2 = l.at(1);
+	Node* at3 = l.at(2);
+	Node* at4 = l.at(3); // this index does not exist so it should return nullptr
+
+	// validation
+	assert(at1->value == 10);
+	assert(at2->value == 20);
+	assert(at3->value == 30);
+	assert(at4 == nullptr);
+
+	//cleanup
+	return true;
+}

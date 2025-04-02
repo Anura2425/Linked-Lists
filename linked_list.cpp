@@ -64,3 +64,14 @@ int LinkedList::size(){
 	return count;
 }
 //hi
+Node* LinkedList::at(int index){
+	int curr_index = 0;
+	for(Node* iter=head; iter!=nullptr; iter=iter->next){
+		if (curr_index == index){
+			return iter;
+		}
+		curr_index++;
+	}
+	// If the index is not found in the linked list return nullptr
+	return nullptr;
+}
