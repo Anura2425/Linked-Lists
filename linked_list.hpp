@@ -7,7 +7,7 @@ class Node {
 		double value;
 		Node* next;
 		~Node();
-		Node(double val);
+		Node(int k, double val);
 };
 
 class LinkedList {
@@ -18,8 +18,8 @@ class LinkedList {
 		LinkedList();
 		~LinkedList();
 		Node* get_head();
-		bool push_back(double val);
-		bool push_front(double val);
+		bool push_back(int key, double val);
+		bool push_front(int key, double val);
 		bool is_empty();
 		Node* at(int index);
 		double search(int key);

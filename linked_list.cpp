@@ -1,7 +1,8 @@
 #include "linked_list.hpp"
 #include <iostream>
 
-Node::Node(double val = 0) {
+Node::Node(int def_key = 0, double val = 0) {
+	key = def_key;
 	value = val;
 	next = nullptr;
 }
@@ -28,27 +29,28 @@ LinkedList::~LinkedList() {
 	}
 }
 
-bool LinkedList::push_back(double val) {
-	if (head == nullptr){
-		head = new Node(val);
-	}
-	else {
-		Node* iter;
-		for (iter = head; iter->next != nullptr; iter = iter->next);
-		iter->next = new Node(val);
-	}
-	return true;
+bool LinkedList::push_back(int key, double val){
+    if(head==nullptr){
+        head = new Node(key, val);
+    }
+    else {
+        Node* iter;
+        for(iter = head; iter->next != nullptr; iter = iter->next);
+        iter->next = new Node(key, val);
+    }
+    return true;
 }
 
-bool LinkedList::push_front(double val) {
-	if (head == nullptr){  
-		head = new Node(val);
-	} else {
-		Node* new_node = new Node(val);
-		new_node->next = head;
-		head = new_node;
-	}
-	return true;
+bool LinkedList::push_front(int key, double val){
+    if(head==nullptr){
+        head = new Node(key, val);
+    }
+    else {
+        Node* new_node = new Node(key, val);
+        new_node->next = head;
+        head = new_node;
+    }
+    return true;
 }
 
 
