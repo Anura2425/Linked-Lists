@@ -22,6 +22,7 @@ class LinkedList {
 		bool push_front(double val);
 		bool is_empty();
 		Node* at(int index);
+		double search(int key);
 		int size();
 };
 

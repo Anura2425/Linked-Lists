@@ -7,6 +7,7 @@ bool test_push_front();
 bool test_is_empty();
 bool test_size();
 bool test_at();
+bool test_search();
 
 int main() {
 	std::cout << "Test Push Back: " << (test_push_back() ? "Passed" : "Failed") << std::endl;
@@ -105,5 +106,27 @@ bool test_at(){
 	assert(at4 == nullptr);
 
 	//cleanup
+	return true;
+}
+
+bool test_search(){
+	// set up
+	LinkedList l;
+	// TODO: NEED TO WAIT FOR NEW PUSHBACK/FRONT IMPLEMENTATION TO ADD KEY WITH VALUE HERE
+	bool rv1 = l.push_back(10); // add key 0
+	bool rv2 = l.push_back(20); // add key 1
+	bool rv3 = l.push_back(30); // add key 2
+
+	// execution
+	double value1 = l.search(0);
+	double value2 = l.search(1);
+	double value3 = l.search(2);
+
+	// validation
+	assert(value1 == 10);
+	assert(value2 == 20);
+	assert(value3 == 30);
+	
+	// cleanup
 	return true;
 }

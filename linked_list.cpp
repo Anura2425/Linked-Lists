@@ -75,3 +75,13 @@ Node* LinkedList::at(int index){
 	// If the index is not found in the linked list return nullptr
 	return nullptr;
 }
+
+double LinkedList::search(int key){
+	for(Node* iter=head; iter!=nullptr; iter=iter->next){
+		if (iter->key == key){
+			return iter->value;
+		}
+	}
+	// If the key is not found in the linked list, throw an out of range error
+	throw std::out_of_range("Key not found");
+}
