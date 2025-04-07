@@ -80,6 +80,9 @@ Node* LinkedList::at(int index){
 }
 
 double LinkedList::search(int key){
+	/*
+	Function to get the value stored in the node with the inputted key
+	*/
 	for(Node* iter=head; iter!=nullptr; iter=iter->next){
 		if (iter->key == key){
 			return iter->value;
@@ -127,14 +130,9 @@ void LinkedList::pretty_print() {
     Node* current = head;
     int index = 0;
 	int spacing = 0;
-	int curr_val = 0;
+	double curr_val = 0;
 
     while (current != nullptr) {
-		// get length of current value to be able to allocate the correct amount of spacing
-		curr_val = current->value;
-		std::string num_str = std::to_string(curr_val);
-		spacing = num_str.length();
-
         // Print top of the box
         std::cout << "            _____________________" << std::endl;
         
