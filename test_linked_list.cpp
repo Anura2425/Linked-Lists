@@ -8,6 +8,7 @@ bool test_is_empty();
 bool test_size();
 bool test_at();
 bool test_search();
+bool test_insert();
 
 int main() {
 	std::cout << "Test Push Back: " << (test_push_back() ? "Passed" : "Failed") << std::endl;
@@ -16,6 +17,7 @@ int main() {
 	std::cout << "Test Size: " << (test_size() ? "Passed" : "Failed") << std::endl; 
 	std::cout << "Test At: " << (test_at() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Search: " << (test_search() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Insert: " << (test_insert() ? "Passed" : "Failed") << std::endl;
 }
 
 bool test_size(){
@@ -130,4 +132,26 @@ bool test_search(){
 	
 	// cleanup
 	return true;
+}
+
+bool test_insert() { // for now, this is only checking the values of inserted nodes, but I might change this later
+	//set up
+    LinkedList l;
+
+    //execution
+    bool rv1 = l.insert(0, 0.0, 0); //{0.0} - true
+    bool rv2 = l.insert(2, 2.2, 1); //{0.0, 2.2} - true
+    bool rv3 = l.insert(1, 1.1, 1); //{0.0, 1.1, 2.2} - true
+    bool rv4 = l.insert(5, 5.5, -1); // no change - false
+    bool rv5 = l.insert(7, 7.7, 8); // no change - false
+
+    //validation
+    Node* l_head = l.get_head();
+    bool av1 = rv1 && l_head->value == 0.0;
+    bool av2 = rv2 && l_head->next->value == 1.1;
+    bool av3 = rv3 && l_head->next->next->value == 2.2;
+    bool av4 = !rv4;
+    bool av5 = !rv5 && l_head->next->next->next == nullptr;
+
+    return av1 && av2 && av3 && av4 && av5;
 }

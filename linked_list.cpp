@@ -1,7 +1,7 @@
 #include "linked_list.hpp"
 #include <iostream>
 
-Node::Node(int def_key = 0, double val = 0) {
+Node::Node(int def_key, double val) {
 	key = def_key;
 	value = val;
 	next = nullptr;
@@ -65,7 +65,7 @@ int LinkedList::size(){
 	}
 	return count;
 }
-//hi
+
 Node* LinkedList::at(int index){
 	int curr_index = 0;
 	for(Node* iter=head; iter!=nullptr; iter=iter->next){
@@ -86,4 +86,28 @@ double LinkedList::search(int key){
 	}
 	// If the key is not found in the linked list, throw an out of range error
 	throw std::out_of_range("Key not found");
+}
+
+bool LinkedList::insert(int key, double value, int index) { //This is the kind of messy/inefficient version that we did in class, I can fix it to be more efficient later if we want that
+	if (index == 0) {
+        push_front(key, value);
+    }
+    else if (index > size() || index < 0 || head == nullptr) {
+        return false;
+    }
+    else if (index == size()) {
+        push_back(key, value);
+    }
+    else {
+        Node* new_node = new Node(key, value);
+        Node* iter = head;
+        int count = 1;
+        while (count < index) {
+            iter = iter->next;
+            count++;
+        }
+        new_node->next = iter->next;
+        iter->next = new_node;
+	}
+	return true;
 }

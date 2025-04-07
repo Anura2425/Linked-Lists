@@ -24,6 +24,7 @@ class LinkedList {
 		Node* at(int index);
 		double search(int key);
 		int size();
+		bool insert(int key, double val, int index);
 };
 
 
