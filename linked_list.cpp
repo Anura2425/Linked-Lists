@@ -130,7 +130,6 @@ void LinkedList::pretty_print() {
     Node* current = head;
     int index = 0;
 	int spacing = 0;
-	double curr_val = 0;
 
     while (current != nullptr) {
         // Print top of the box
@@ -149,8 +148,8 @@ void LinkedList::pretty_print() {
         
         // Print row with arrow to next node (if not the last node)
         if (current->next != nullptr) {
-            std::cout << "                    ||" << std::endl;
-            std::cout << "                    \\/" << std::endl;
+            std::cout << "                      |" << std::endl;
+            std::cout << "                      v" << std::endl;
         }
         
 		// Iterate to the next node in the LinkedList
