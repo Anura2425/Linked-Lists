@@ -1,5 +1,6 @@
 #include "linked_list.hpp"
 #include <iostream>
+#include <iomanip>
 
 Node::Node(int def_key, double val) {
 	key = def_key;
@@ -110,4 +111,52 @@ bool LinkedList::insert(int key, double value, int index) { //This is the kind o
         iter->next = new_node;
 	}
 	return true;
+}
+
+void LinkedList::pretty_print() {
+	/*
+	Function to print out all nodes of a linked list 
+	and important information in a "pretty" way
+	(Terms of a "pretty print" were agreed upon by Gavin and Dr. Johnson) 
+	*/
+    if (is_empty()) {
+        std::cout << "List is empty" << std::endl;
+        return;
+    }
+
+    Node* current = head;
+    int index = 0;
+	int spacing = 0;
+	int curr_val = 0;
+
+    while (current != nullptr) {
+		// get length of current value to be able to allocate the correct amount of spacing
+		curr_val = current->value;
+		std::string num_str = std::to_string(curr_val);
+		spacing = num_str.length();
+
+        // Print top of the box
+        std::cout << "            _____________________" << std::endl;
+        
+        // Print row with the key and current nodes address
+        std::cout << "            | Key: " << std::setw(11) << std::left << current->key 
+                  << "  |    " << "Current Node: " << current << std::endl;
+        
+        // Print row with index and value 
+        std::cout << " Index: " << std::setw(2) << std::left << index 
+                  << "  | Val: " << std::setw(11) << std::left << current->value << "  |" << std::endl;
+        
+        // Print row with the bottom of the box and next Nodes address
+        std::cout << "            |___________________|    " << "Next Node: " << current->next << std::endl;
+        
+        // Print row with arrow to next node (if not the last node)
+        if (current->next != nullptr) {
+            std::cout << "                    ||" << std::endl;
+            std::cout << "                    \\/" << std::endl;
+        }
+        
+		// Iterate to the next node in the LinkedList
+        current = current->next;
+        index++;
+    }
 }

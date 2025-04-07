@@ -25,6 +25,7 @@ class LinkedList {
 		double search(int key);
 		int size();
 		bool insert(int key, double val, int index);
+		void pretty_print();
 };
 
 
