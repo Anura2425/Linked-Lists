@@ -54,7 +54,6 @@ bool LinkedList::push_front(int key, double val){
     return true;
 }
 
-
 bool LinkedList::is_empty() {
 	return head == nullptr;
 }
@@ -155,5 +154,34 @@ void LinkedList::pretty_print() {
 		// Iterate to the next node in the LinkedList
         current = current->next;
         index++;
+    }
+}
+
+bool LinkedList::remove_value(double value) {
+	if (head == nullptr) {
+        return false;
+    }
+    else if (head->value == value) {
+        Node* temp = head;
+        head = head->next;
+        temp->next = nullptr;
+        delete temp;
+        temp = nullptr;
+
+        return true;
+    }
+    else {
+        for (Node* iter = head; iter->next != nullptr; iter = iter->next) {
+            if (iter->next->value == value) {
+                Node* temp = iter->next;
+                iter->next = temp->next;
+                temp->next = nullptr;
+                delete temp;
+                temp = nullptr;
+
+            return true;
+            }
+        }
+    return false;
     }
 }

@@ -9,6 +9,7 @@ bool test_size();
 bool test_at();
 bool test_search();
 bool test_insert();
+bool test_remove_value();
 
 int main() {
 	std::cout << "Test Push Back: " << (test_push_back() ? "Passed" : "Failed") << std::endl;
@@ -18,6 +19,7 @@ int main() {
 	std::cout << "Test At: " << (test_at() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Search: " << (test_search() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Insert: " << (test_insert() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Remove Value: " << (test_remove_value() ? "Passed" : "Failed") << std::endl;
 }
 
 bool test_size(){
@@ -134,7 +136,7 @@ bool test_search(){
 	return true;
 }
 
-bool test_insert() { // for now, this is only checking the values of inserted nodes, but I might change this later
+bool test_insert() { // for now, this is only checking the values of inserted nodes, but I might change this later if needed
 	//set up
     LinkedList l;
 
@@ -154,4 +156,40 @@ bool test_insert() { // for now, this is only checking the values of inserted no
     bool av5 = !rv5 && l_head->next->next->next == nullptr;
 
     return av1 && av2 && av3 && av4 && av5;
+}
+
+bool test_remove_value() { //The test for this is a little messy and only checking values again, but I can change that later if needed
+	//set up
+    LinkedList l;
+    l.push_back(1, 1.1);
+    l.push_back(2, 2.2);
+    l.push_back(4, 4.4);
+    l.push_back(2, 2.2);
+    l.push_back(4, 4.4);
+    l.push_back(4, 4.4);
+    l.push_back(2, 2.2); //{1.1, 2.2, 4.4, 2.2, 4.4, 4.4, 2.2}
+    LinkedList l2; // empty list
+    LinkedList l3;
+    l3.push_back(0, 0.0); // {0.0}
+
+    //execution
+    bool rv1 = l.remove_value(2.2); //true {1.1, 4.4, 2.2, 4.4, 4.4, 2.2}
+    bool rv2 = l.remove_value(4.4); //true {1.1, 2.2, 4.4, 4.4, 2.2}
+    bool rv3 = l.remove_value(4.4); //true {1.1, 2.2, 4.4, 2.2}
+    bool rv4 = l.remove_value(3.3); //false - no change
+    bool rv5 = l2.remove_value(5.5); //false, set empty
+    bool rv6 = l3.remove_value(0.0); //true - head = nullptr
+
+    //validation
+    Node* l_head = l.get_head();
+    Node* l2_head = l2.get_head();
+    Node* l3_head = l3.get_head();
+    bool av1 = rv1 && l_head->value == 1.1;
+    bool av2 = rv2 && l_head->next->value == 2.2;
+    bool av3 = rv3 && l_head->next->next->value == 4.4;
+    bool av4 = !rv4 && l_head->next->next->next->value == 2.2 && l_head->next->next->next->next == nullptr;
+    bool av5 = !rv5 && l2_head == nullptr;
+    bool av6 = rv6 && l3_head == nullptr;
+
+    return av1 && av2 && av3 && av4 && av5 && av6;
 }
