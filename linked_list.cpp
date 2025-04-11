@@ -171,7 +171,8 @@ bool LinkedList::remove_value(double value) {
         return true;
     }
     else {
-        for (Node* iter = head; iter->next != nullptr; iter = iter->next) {
+		Node* iter;
+        for (iter = head; iter->next != nullptr; iter = iter->next) {
             if (iter->next->value == value) {
                 Node* temp = iter->next;
                 iter->next = temp->next;
@@ -184,4 +185,13 @@ bool LinkedList::remove_value(double value) {
         }
     return false;
     }
+}
+
+void LinkedList::print() {
+	Node* iter;
+	std::cout << "{";
+	for(iter = head; iter->next != nullptr; iter = iter->next) {
+		std::cout << "(" << iter->key << ", " << iter->value << "), ";
+	}
+	std::cout << "(" << iter->key << ", " << iter->value << ")}" << std::endl;
 }

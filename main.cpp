@@ -70,7 +70,9 @@ int main(){
     
 
 
-    // Question 2:
+    /* Question 2
+    Years are calculated many ways. Using the Intercalation and Astronomical years sections of the year wikipedia page. Create a key value pair for each method of calculation that has an equivalent number of days starting from the index 1. Example: Julian calendar would be stored using the key value pair (1, 365.25) because it is the first in these sections that has an equivalent day calculation). What is the difference between the largest and smallest calculation in days when talking about 10,000 years?    
+    */
 
     // Step 0: Print Banner for question number
     std::cout << std::endl;
@@ -80,8 +82,43 @@ int main(){
     std::cout << "|______________|" << std::endl;
     std::cout << std::endl;
 
-    // Step 1:
+    // Step 1: Create list with the numbers of days there are in a year using different calendars, using the keys to index them starting at 1
+    LinkedList years;
+    years.push_back(1, 365.25); // Julian calendar/Julian year
+    years.push_back(2, 365.2425); // Gregorian calendar
+    years.push_back(3, 365.256363004); // sidereal year
+    years.push_back(4, 365.242); // tropical year
+    years.push_back(5, 365.259636); // anomolistic year
+    years.push_back(6, 346.620075883); // Draconic year
+    years.push_back(7, 411.78443029); // full moon cyle
+    years.push_back(8, 354.37); // lunar year
+    years.push_back(9, 365.0); // vague year
+    years.push_back(10, 365.2568983); // Gaussian year
 
+    // Step 2: Compare all values multiplied by 10,000 to find the max and min number of days for 10,000 years
+    double max_val = years.search(1)*10000;
+    double min_val = years.search(1)*10000;
+    int max_key = 1;
+    int min_key = 1;
+    int curr_key = 1;
+    double curr_val;
+    for (Node* iter = years.get_head(); iter != nullptr; iter = iter->next) {
+        curr_val = years.search(curr_key)*10000;
+        if (curr_val > max_val) {
+            max_val = curr_val;
+            max_key = curr_key;
+        }
+        else if (curr_val < min_val) {
+            min_val = curr_val;
+            min_key = curr_key;
+        }
+        curr_key++;
+    }
+
+    // Step 3: Output the max and min number of days for 10,000 years and their calculated difference
+    std::cout << "Maximum number of days for 10,000 years: " << max_val << " days with calendar " << max_key << std::endl;
+    std::cout << "Minimum number of days for 10,000 years: " << min_val << " days with calendar " << min_key << std::endl;
+    std::cout << "Difference between maximum and minimum number of days for 10,000 years: " << max_val - min_val << " days" << std::endl;
 
 
     // Question 3:
