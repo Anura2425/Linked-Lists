@@ -186,6 +186,35 @@ bool LinkedList::remove_value(double value) {
     return false;
     }
 }
+bool LinkedList::remove_key(int key){
+	if (head == nullptr) {
+        return false;
+    }
+    else if (head->value == key) {
+        Node* temp = head;
+        head = head->next;
+        temp->next = nullptr;
+        delete temp;
+        temp = nullptr;
+
+        return true;
+    }
+    else {
+		Node* iter;
+        for (iter = head; iter->next != nullptr; iter = iter->next) {
+            if (iter->next->key == key) {
+                Node* temp = iter->next;
+                iter->next = temp->next;
+                temp->next = nullptr;
+                delete temp;
+                temp = nullptr;
+
+            return true;
+            }
+        }
+    return false;
+    }
+}
 
 void LinkedList::print() {
 	Node* iter;
