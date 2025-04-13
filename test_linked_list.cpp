@@ -9,7 +9,10 @@ bool test_size();
 bool test_at();
 bool test_search();
 bool test_insert();
+bool test_remove();
 bool test_remove_value();
+bool test_remove_key();
+
 
 int main() {
 	std::cout << "Test Push Back: " << (test_push_back() ? "Passed" : "Failed") << std::endl;
@@ -158,6 +161,52 @@ bool test_insert() { // for now, this is only checking the values of inserted no
     return av1 && av2 && av3 && av4 && av5;
 }
 
+bool test_remove(){
+	//set up
+    LinkedList l;
+    l.push_back(1, 1.1);
+    l.push_back(2, 2.2);
+    l.push_back(3, 3.3);
+    l.push_back(4, 4.4);
+    l.push_back(5, 5.5);
+    l.push_back(6, 6.6);
+    l.push_back(7, 7.7); 
+    //{1, 2, 3, 4, 5, 6, 7}
+    LinkedList l2; // empty list
+    LinkedList l3;
+    l3.push_back(0, 0.0); 
+    // {0.0}
+
+    //execution
+    bool rv1 = l.remove(1); 
+    //true, {1, 3, 4, 5, 6, 7}
+    bool rv2 = l.remove(2); 
+    //true, {1, 3, 5, 6, 7}
+    bool rv3 = l.remove(3); 
+    //true, {1, 3, 5, 7}
+    bool rv4 = l.remove(5); //false 
+    bool rv5 = l2.remove(1); //false, empty case
+    bool rv6 = l3.remove(0); //true, head = nullptr
+
+    //validation
+    Node* l_head = l.get_head();
+    Node* l2_head = l2.get_head();
+    Node* l3_head = l3.get_head();
+
+    bool av1 = rv1 && l_head->value == 1;
+    bool av2 = rv2 && l_head->next->value == 3;
+    bool av3 = rv3 && l_head->next->next->value == 5;
+    bool av4 = !rv4 && l_head->next->next->next->value == 7 && l_head->next->next->next->next == nullptr;
+    bool av5 = !rv5 && l2_head == nullptr;
+    bool av6 = rv6 && l3_head == nullptr;
+
+
+    //cleanup
+    return av1 && av2 && av3 && av4 && av5 && av6;
+
+}
+
+
 bool test_remove_value() { //The test for this is a little messy and only checking values again, but I can change that later if needed
 	//set up
     LinkedList l;
@@ -190,6 +239,49 @@ bool test_remove_value() { //The test for this is a little messy and only checki
     bool av4 = !rv4 && l_head->next->next->next->value == 2.2 && l_head->next->next->next->next == nullptr;
     bool av5 = !rv5 && l2_head == nullptr;
     bool av6 = rv6 && l3_head == nullptr;
+
+    return av1 && av2 && av3 && av4 && av5 && av6;
+}
+bool test_remove_key() { 
+	//set up
+    LinkedList l;
+    l.push_back(1, 1.1);
+    l.push_back(2, 2.2);
+    l.push_back(5, 5.5);
+    l.push_back(2, 2.2);
+    l.push_back(5, 5.5);
+    l.push_back(1, 1.1);
+    l.push_back(1, 1.1); 
+    //{1, 2, 5, 2, 5, 1, 1}
+
+    LinkedList l2; // empty list
+
+    LinkedList l3;
+    l3.push_back(0, 0.0); // {0.0}
+
+    //execution
+
+    bool rv1 = l.remove_key(2); //true {1, 5, 2, 5, 1, 1}
+    bool rv2 = l.remove_key(1); //true {5, 2, 5, 1, 1}
+    bool rv3 = l.remove_key(1); //true {5, 2, 5, 1}
+    bool rv4 = l.remove_key(3); //false, key doesn't exist
+    bool rv5 = l2.remove_key(5); //fals, empty set
+    bool rv6 = l3.remove_key(0); //true, head = nullptr
+
+    //validation
+
+    Node* l_head = l.get_head();
+    Node* l2_head = l2.get_head();
+    Node* l3_head = l3.get_head();
+    bool av1 = rv1 && l_head->value == 5;
+    bool av2 = rv2 && l_head->next->value == 2;
+    bool av3 = rv3 && l_head->next->next->value == 5;
+    bool av4 = !rv4 && l_head->next->next->next->value == 1 && l_head->next->next->next->next == nullptr;
+    bool av5 = !rv5 && l2_head == nullptr;
+    bool av6 = rv6 && l3_head == nullptr;
+
+    //clean up
+    
 
     return av1 && av2 && av3 && av4 && av5 && av6;
 }
