@@ -286,3 +286,39 @@ void selectionSort(LinkedList& list) {
         }
     }
 }
+void LinkedList::bubble_sort(){
+    int n = size();
+    bool swapped;
+
+    for (int i = 0; i < n; ++i) {
+        Node* iter = head;
+        Node* prev = nullptr;
+        swapped = false;
+
+        while (iter && iter->next) {
+            Node* temp = iter->next;
+
+            if (iter->value > temp->value) {
+                swapped = true;
+
+
+                iter->next = temp->next;
+                temp->next = iter;
+
+                if (prev == nullptr) {
+                    head = temp;
+                } else {
+                    prev->next = temp;
+                }
+
+                prev = temp;
+                
+            } else {
+                prev = iter;
+                iter = iter->next;
+            }
+        }
+
+        if (!swapped) break;
+    }
+}
