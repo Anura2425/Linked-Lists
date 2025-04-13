@@ -285,3 +285,30 @@ bool test_remove_key() {
 
     return av1 && av2 && av3 && av4 && av5 && av6;
 }
+bool test_bubble_sort(){
+	//setup
+	LinkedList l;
+
+    	l.push_back(4, 5.5);
+    	l.push_back(2, 7.2);
+    	l.push_back(6, 3.8);
+    	l.push_back(8, 9.1);
+
+
+	//execution
+
+	l.bubble_sort();
+
+
+	//validation
+
+	bool av1 = l.get_head()-> key == 6 && l.get_head()-> value == 3.8;
+   	bool av2 = l.get_head()-> next -> key == 4 &&  l.get_head()-> next -> value == 5.5;
+    	bool av3 = l.get_head()-> next -> next -> key == 2 && l.get_head()-> next -> next -> value == 7.2;
+    	bool av4 = l.get_head()-> next -> next -> next -> key == 8 && l.get_head() -> next -> next -> next -> value == 9.1;
+	
+	return av1 && av2 && av3 && av4;
+
+
+
+}
