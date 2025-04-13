@@ -12,6 +12,7 @@ bool test_insert();
 bool test_remove();
 bool test_remove_value();
 bool test_remove_key();
+bool test_selection_sort();
 
 
 int main() {
@@ -23,6 +24,34 @@ int main() {
 	std::cout << "Test Search: " << (test_search() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Insert: " << (test_insert() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Remove Value: " << (test_remove_value() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Selection Sort" << (test_selection_sort() ? "Passed" : "Failed") << std::endl;
+
+}
+
+bool test_selection_sort(){
+    LinkedList l;
+
+    // Add unsorted test data
+    l.push_back(1, 4.4);
+    l.push_back(2, 2.2);
+    l.push_back(3, 5.5);
+    l.push_back(4, 1.1);
+    l.push_back(5, 3.3);
+
+    // Run selection sort
+    l.selectionSort(l);
+
+    // After sorting, values should be in ascending order
+    double expected[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+
+    for (int i = 0; i < l.size(); ++i) {
+        Node* node = l.at(i);
+        if (abs(node->value - expected[i]) > 0.001) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool test_size(){
