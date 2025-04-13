@@ -25,8 +25,9 @@ int main() {
 	std::cout << "Test Search: " << (test_search() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Insert: " << (test_insert() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Remove Value: " << (test_remove_value() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Remove Key: " << (test_remove_key() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Selection Sort" << (test_selection_sort() ? "Passed" : "Failed") << std::endl;
-	std::cout << "Test Bubble Sort" << (test_bubble_sort() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Bubble Sort: " << (test_bubble_sort() ? "Passed" : "Failed") << std::endl;
 }
 
 bool test_selection_sort(){
