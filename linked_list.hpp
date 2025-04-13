@@ -18,7 +18,7 @@ class LinkedList {
 		LinkedList();
 		~LinkedList();
 		Node* get_head();
-		void selectionSort(LinkedList list);
+		void selectionSort(LinkedList& list);
 		bool push_back(int key, double val);
 		bool push_front(int key, double val);
 		bool is_empty();
