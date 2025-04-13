@@ -40,7 +40,7 @@ bool test_selection_sort(){
     l.push_back(5, 3.3);
 
     // Run selection sort
-    l.selectionSort(l);
+    selectionSort(l);
 
     // After sorting, values should be in ascending order
     double expected[] = {1.1, 2.2, 3.3, 4.4, 5.5};
