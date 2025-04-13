@@ -131,9 +131,7 @@ int main(){
     std::cout << "|______________|" << std::endl;
     std::cout << std::endl;
 
-    double compute_total_cost() {
     LinkedList nasdaqList;
-
     // Top 15 companies by market cap and their stock prices on March 15, 2025
     nasdaqList.push_back(1, 247.10);  // Apple
     nasdaqList.push_back(2, 130.28);  // NVIDIA
@@ -159,10 +157,7 @@ int main(){
         total_cost += node->value * 3;
     }
 
-    return total_cost;
-}
-    double total = compute_total_cost();
-    std::cout << "Total cost to buy 3 shares of each top 15 NASDAQ company: $" << total << std::endl;
+    std::cout << "Total cost to buy 3 shares of each top 15 NASDAQ company: $" << total_cost << std::endl;
     
     return 0;
 }
