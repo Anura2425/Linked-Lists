@@ -29,6 +29,7 @@ class LinkedList {
 		bool remove(int index);
 		bool remove_value(double value);
 		bool remove_key(int key);
+		void bubble_sort();
 		void print();
 };
 
