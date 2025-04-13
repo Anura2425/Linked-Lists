@@ -14,6 +14,7 @@ bool test_remove_value();
 bool test_remove_key();
 bool test_selection_sort();
 bool test_bubble_sort();
+bool test_prints();
 
 
 int main() {
@@ -26,8 +27,11 @@ int main() {
 	std::cout << "Test Insert: " << (test_insert() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Remove Value: " << (test_remove_value() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Remove Key: " << (test_remove_key() ? "Passed" : "Failed") << std::endl;
-	std::cout << "Test Selection Sort" << (test_selection_sort() ? "Passed" : "Failed") << std::endl;
-	std::cout << "Test Bubble Sort: " << (test_bubble_sort() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Selection Sort: " << (test_selection_sort() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Bubble Sort: : " << (test_bubble_sort() ? "Passed" : "Failed") << std::endl;
+	
+	// Test both prints
+	test_prints();
 }
 
 bool test_selection_sort(){
@@ -41,7 +45,7 @@ bool test_selection_sort(){
     l.push_back(5, 3.3);
 
     // Run selection sort
-    selectionSort(l);
+    l.selectionSort();
 
     // After sorting, values should be in ascending order
     double expected[] = {1.1, 2.2, 3.3, 4.4, 5.5};
@@ -151,7 +155,6 @@ bool test_at(){
 bool test_search(){
 	// set up
 	LinkedList l;
-	// TODO: NEED TO WAIT FOR NEW PUSHBACK/FRONT IMPLEMENTATION TO ADD KEY WITH VALUE HERE
 	bool rv1 = l.push_back(0, 10); // add key 0
 	bool rv2 = l.push_back(1, 20); // add key 1
 	bool rv3 = l.push_back(2, 30); // add key 2
@@ -170,7 +173,7 @@ bool test_search(){
 	return true;
 }
 
-bool test_insert() { // for now, this is only checking the values of inserted nodes, but I might change this later if needed
+bool test_insert() {
 	//set up
     LinkedList l;
 
@@ -238,7 +241,7 @@ bool test_remove(){
 }
 
 
-bool test_remove_value() { //The test for this is a little messy and only checking values again, but I can change that later if needed
+bool test_remove_value() {
 	//set up
     LinkedList l;
     l.push_back(1, 1.1);
@@ -338,11 +341,29 @@ bool test_bubble_sort(){
 
 	bool av1 = l.get_head()-> key == 6 && l.get_head()-> value == 3.8;
    	bool av2 = l.get_head()-> next -> key == 4 &&  l.get_head()-> next -> value == 5.5;
-    	bool av3 = l.get_head()-> next -> next -> key == 2 && l.get_head()-> next -> next -> value == 7.2;
-    	bool av4 = l.get_head()-> next -> next -> next -> key == 8 && l.get_head() -> next -> next -> next -> value == 9.1;
+    bool av3 = l.get_head()-> next -> next -> key == 2 && l.get_head()-> next -> next -> value == 7.2;
+    bool av4 = l.get_head()-> next -> next -> next -> key == 8 && l.get_head() -> next -> next -> next -> value == 9.1;
 	
 	return av1 && av2 && av3 && av4;
+}
 
+bool test_prints(){
+	
+	LinkedList l;
+    l.push_back(1, 300.0);
+    l.push_back(2, 1.0); 
+    l.push_back(3, -314.2);
+    l.push_back(4, 1232222222); // long value example
+    l.push_back(1000000, 10.22); // long key example
 
+	// normal print LinkedList l
+	std::cout << "\nNormal Print:" << std::endl;
+	l.print();
 
+	// pretty print the same list
+	std::cout << "\nPretty Print:" << std::endl;
+    l.pretty_print();
+	
+
+	return true;
 }

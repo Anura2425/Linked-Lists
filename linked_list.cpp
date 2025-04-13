@@ -259,15 +259,15 @@ void LinkedList::print() {
 	std::cout << "(" << iter->key << ", " << iter->value << ")}" << std::endl;
 }
 
-void selectionSort(LinkedList& list) {
-    int n = list.size();
+void LinkedList::selectionSort(){
+    int length = size();
 
-    for (int i = 0; i < n - 1; ++i) {
+    for (int i = 0; i < length - 1; ++i) {
         int minIndex = i;
-        Node* minNode = list.at(i);
+        Node* minNode = at(i);
 
-        for (int j = i + 1; j < n; ++j) {
-            Node* current = list.at(j);
+        for (int j = i + 1; j < length; ++j) {
+            Node* current = at(j);
             if (current->value < minNode->value) {
                 minIndex = j;
                 minNode = current;
@@ -275,17 +275,21 @@ void selectionSort(LinkedList& list) {
         }
 
         if (minIndex != i) {
-            Node* nodeI = list.at(i);
-            Node* nodeMin = list.at(minIndex);
+            Node* nodeI = at(i);
+            Node* nodeMin = at(minIndex);
 
-            list.remove(minIndex);
-            list.remove(i);
+            double tempVal = nodeI->value;
+            int tempKey = nodeI->key;
 
-            list.insert(nodeMin->key, nodeMin->value, i);
-            list.insert(nodeI->key, nodeI->value, minIndex);
+            nodeI->value = nodeMin->value;
+            nodeI->key = nodeMin->key;
+
+            nodeMin->value = tempVal;
+            nodeMin->key = tempKey;
         }
     }
 }
+
 void LinkedList::bubble_sort(){
     int n = size();
     bool swapped;
