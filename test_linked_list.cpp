@@ -301,20 +301,23 @@ bool test_remove_key() {
     //validation
 
     Node* l_head = l.get_head();
-    Node* l2_head = l2.get_head();
-    Node* l3_head = l3.get_head();
-    bool av1 = rv1 && l_head->value == 5;
-    bool av2 = rv2 && l_head->next->value == 2;
-    bool av3 = rv3 && l_head->next->next->value == 5;
-    bool av4 = !rv4 && l_head->next->next->next->value == 1 && l_head->next->next->next->next == nullptr;
-    bool av5 = !rv5 && l2_head == nullptr;
-    bool av6 = rv6 && l3_head == nullptr;
 
-    //clean up
-    
+    bool av1 = rv1;
+    bool av2 = rv2;
+    bool av3 = rv3;
+    bool av4 = !rv4;
+    bool av5 = !rv5 && l2.get_head() == nullptr;
+    bool av6 = rv6 && l3.get_head() == nullptr;
+    bool av7 = l_head && l_head->key == 5;
+    bool av8 = l_head->next && l_head->next->key == 2; 
+    bool av9 = l_head->next->next && l_head->next->next->key == 5; 
+    bool av10 = l_head->next->next->next && l_head->next->next->next->key == 1; 
+    bool av11 = l_head->next->next->next->next == nullptr;
 
-    return av1 && av2 && av3 && av4 && av5 && av6;
+    //cleanup
+    return av1 && av2 && av3 && av4 && av5 && av6 && av7 && av8 && av9 && av10 && av11;
 }
+
 bool test_bubble_sort(){
 	//setup
 	LinkedList l;
