@@ -215,6 +215,40 @@ bool LinkedList::remove_key(int key){
     return false;
     }
 }
+bool LinkedList::remove(int index){
+	if (head == nullptr || index < 0) {
+        return false;
+    }
+
+    if (index == 0) {
+        Node* temp = head;
+        head = head->next;
+		temp->next = nullptr;
+        delete temp;
+		temp = nullptr;
+        return true;
+    } 
+	
+    Node* iter = head;
+    for (int i = 1; i < index; ++i) {
+        if (iter->next == nullptr) {
+            return false; 
+        }
+        iter = iter->next;
+    }
+
+    if (iter->next == nullptr) {
+        return false; 
+    }
+	else{
+    	Node* temp = iter->next;
+    	iter->next = temp->next; 
+    	delete temp;
+    	return true;
+	}
+	return false;
+    
+}
 
 void LinkedList::print() {
 	Node* iter;
