@@ -26,7 +26,9 @@ class LinkedList {
 		int size();
 		bool insert(int key, double val, int index);
 		void pretty_print();
+		bool remove(int index);
 		bool remove_value(double value);
+		bool remove_key(int key);
 		void print();
 };
 
