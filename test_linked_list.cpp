@@ -25,6 +25,7 @@ int main() {
 	std::cout << "Test At: " << (test_at() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Search: " << (test_search() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Insert: " << (test_insert() ? "Passed" : "Failed") << std::endl;
+	std::cout << "Test Remove: " << (test_remove() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Remove Value: " << (test_remove_value() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Remove Key: " << (test_remove_key() ? "Passed" : "Failed") << std::endl;
 	std::cout << "Test Selection Sort: " << (test_selection_sort() ? "Passed" : "Failed") << std::endl;
@@ -205,38 +206,36 @@ bool test_remove(){
     l.push_back(5, 5.5);
     l.push_back(6, 6.6);
     l.push_back(7, 7.7); 
-    //{1, 2, 3, 4, 5, 6, 7}
     LinkedList l2; // empty list
     LinkedList l3;
     l3.push_back(0, 0.0); 
     // {0.0}
-
     //execution
-    bool rv1 = l.remove(1); 
+	//{1, 2, 3, 4, 5, 6, 7}
+    bool rv1 = l.remove(1); // true
     //true, {1, 3, 4, 5, 6, 7}
     bool rv2 = l.remove(2); 
     //true, {1, 3, 5, 6, 7}
     bool rv3 = l.remove(3); 
     //true, {1, 3, 5, 7}
     bool rv4 = l.remove(5); //false 
+	
     bool rv5 = l2.remove(1); //false, empty case
     bool rv6 = l3.remove(0); //true, head = nullptr
-
     //validation
     Node* l_head = l.get_head();
     Node* l2_head = l2.get_head();
     Node* l3_head = l3.get_head();
 
-    bool av1 = rv1 && l_head->value == 1;
-    bool av2 = rv2 && l_head->next->value == 3;
-    bool av3 = rv3 && l_head->next->next->value == 5;
-    bool av4 = !rv4 && l_head->next->next->next->value == 7 && l_head->next->next->next->next == nullptr;
+    bool av1 = rv1 && l_head->value == 1.1;
+    bool av2 = rv2 && l_head->next->value == 3.3;
+    bool av3 = rv3 && l_head->next->next->value == 5.5;
+    bool av4 = !rv4 && l_head->next->next->next->value == 7.7 && l_head->next->next->next->next == nullptr;
     bool av5 = !rv5 && l2_head == nullptr;
     bool av6 = rv6 && l3_head == nullptr;
 
-
     //cleanup
-    return av1 && av2 && av3 && av4 && av5 && av6;
+    return av1 && av2 && av3 && av4&& av5 && av6;
 
 }
 
@@ -276,8 +275,9 @@ bool test_remove_value() {
 
     return av1 && av2 && av3 && av4 && av5 && av6;
 }
+
 bool test_remove_key() { 
-	//set up
+    //set up
     LinkedList l;
     l.push_back(1, 1.1);
     l.push_back(2, 2.2);
@@ -312,15 +312,16 @@ bool test_remove_key() {
     bool av4 = !rv4;
     bool av5 = !rv5 && l2.get_head() == nullptr;
     bool av6 = rv6 && l3.get_head() == nullptr;
-    bool av7 = l_head && l_head->key == 5;
-    bool av8 = l_head->next && l_head->next->key == 2; 
-    bool av9 = l_head->next->next && l_head->next->next->key == 5; 
-    bool av10 = l_head->next->next->next && l_head->next->next->next->key == 1; 
+    bool av7 = l_head->key == 5;
+    bool av8 = l_head->next->key == 2; 
+    bool av9 = l_head->next->next->key == 5; 
+    bool av10 = l_head->next->next->next->key == 1; 
     bool av11 = l_head->next->next->next->next == nullptr;
 
     //cleanup
     return av1 && av2 && av3 && av4 && av5 && av6 && av7 && av8 && av9 && av10 && av11;
 }
+
 
 bool test_bubble_sort(){
 	//setup

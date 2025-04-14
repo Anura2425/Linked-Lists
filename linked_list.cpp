@@ -186,11 +186,11 @@ bool LinkedList::remove_value(double value) {
     return false;
     }
 }
-bool LinkedList::remove_key(int key){
-	if (head == nullptr) {
+bool LinkedList:: remove_key(int key){
+    if (head == nullptr) {
         return false;
     }
-    else if (head->value == key) {
+    else if (head->key == key) {
         Node* temp = head;
         head = head->next;
         temp->next = nullptr;
@@ -199,8 +199,8 @@ bool LinkedList::remove_key(int key){
 
         return true;
     }
-    else {
-		Node* iter;
+    else{
+        Node* iter;
         for (iter = head; iter->next != nullptr; iter = iter->next) {
             if (iter->next->key == key) {
                 Node* temp = iter->next;
@@ -208,46 +208,41 @@ bool LinkedList::remove_key(int key){
                 temp->next = nullptr;
                 delete temp;
                 temp = nullptr;
-
-            return true;
+                return true;
             }
         }
-    return false;
-    }
-}
-bool LinkedList::remove(int index){
-	if (head == nullptr || index < 0) {
         return false;
     }
+}
 
-    if (index == 0) {
-        Node* temp = head;
-        head = head->next;
-		temp->next = nullptr;
-        delete temp;
-		temp = nullptr;
-        return true;
-    } 
-	
-    Node* iter = head;
-    for (int i = 1; i < index; ++i) {
-        if (iter->next == nullptr) {
-            return false; 
-        }
-        iter = iter->next;
-    }
-
-    if (iter->next == nullptr) {
-        return false; 
-    }
-	else{
-    	Node* temp = iter->next;
-    	iter->next = temp->next; 
-    	delete temp;
-    	return true;
+bool LinkedList::remove(int index){
+	if (head == nullptr || index < 0){
+		return false;
 	}
-	return false;
-    
+
+	if (index == 0) {
+		Node* temp = head;
+		head = head->next;
+		temp->next = nullptr;
+		delete temp;
+		temp = nullptr;
+		return true;
+	}
+
+	Node* iter = head;
+	for(int i = 1; i < index; i++){
+		iter = iter->next;
+		if (iter->next == nullptr){
+			return false;
+		}
+	}
+
+	Node* temp = iter->next;
+	iter->next = temp->next;
+	temp->next = nullptr;
+	delete temp;
+	temp = nullptr;
+	return true;
 }
 
 void LinkedList::print() {
